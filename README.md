@@ -75,7 +75,8 @@ This will build the Docker images and start the containers for both the backend 
 Once the containers are up and running, you can access the following endpoints:
 
 API (Laravel): http://localhost:8000
-Frontend (Vue.js): http://localhost:8080
+Frontend (Vue.js): http://localhost
+PhpMyAdmin (Mysql): http://localhost:8081/
 
 
 
