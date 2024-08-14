@@ -71,14 +71,27 @@ docker compose up --build
 This will build the Docker images and start the containers for both the backend and frontend.
 
 
-### 5. Accessing the Application
+### 5. Building the backend
+To finish initializing the laravel project you must perform the migration of the database for this you must access inside the container
+```bash
+cd path/to/GymBro
+docker exec -it gymbro-api-1 /bin/bash
+php artisan migrate
+```
+
+
+### 6. Accessing the Application
 Once the containers are up and running, you can access the following endpoints:
-
-API (Laravel): http://localhost:8000
-Frontend (Vue.js): http://localhost
-PhpMyAdmin (Mysql): http://localhost:8081/
-
+1. API (Laravel): http://localhost:8000
+2. Frontend (Vue.js): http://localhost
+3. PhpMyAdmin (Mysql): http://localhost:8081/
 
 
+### 7. Additional Notes
 
+Ensure that ports 8000 and 8080 are free on your machine to avoid conflicts.
+
+You can stop the running containers by pressing CTRL + C in the terminal where you executed docker-compose up.
+
+To remove the containers and free up resources, you can use the following command:
 
