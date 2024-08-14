@@ -24,7 +24,7 @@ To run the project, make sure you have the following installed on your machine:
 To get started, clone the main `GYMBRO` repository:
 
 ```bash
-git clone <url-of-GYMBRO-repository>
+git clone https://github.com/Juanjose-fernandez/GymBro
 cd GYMBRO
 ```
 
@@ -42,6 +42,7 @@ cd frontend https://github.com/Juanjose-fernandez/GymBro-frontend
 ### 3. Verify the Folder Structure
 After cloning, your folder structure should look like this:
 
+```bash
 GYMBRO/
 ├── api/               # Backend (Laravel)
 │   ├── Dockerfile
@@ -50,6 +51,7 @@ GYMBRO/
 │   ├── Dockerfile
 │   └── ... (Vue code)
 └── docker-compose.yml
+```
 
 ### 4. Running the Project
 To start the project, follow these steps:
