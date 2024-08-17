@@ -1,5 +1,11 @@
 FROM php:8.3-fpm
 
+# Configure non-root user.
+ARG PUID=1000
+ENV PUID ${PUID}
+ARG PGID=1000
+ENV PGID ${PGID}
+
 # Instalar dependencias
 RUN apt-get update && apt-get install -y \
     libpng-dev \
@@ -10,6 +16,12 @@ RUN apt-get update && apt-get install -y \
     git \
     && docker-php-ext-configure gd --with-freetype --with-jpeg \
     && docker-php-ext-install gd pdo pdo_mysql
+
+RUN groupmod -o -g ${PGID} www-data \
+    && usermod -o -u ${PUID} -g www-data www-data \
+    && mkdir -p /home/www-data \
+    && chown -R www-data:www-data /home/www-data \
+    && usermod -d /home/www-data www-data    
 
 # Configurar el directorio de trabajo
 WORKDIR /var/www
@@ -29,8 +41,10 @@ COPY . .
 # Ejecutar autoloader de Composer
 RUN composer dump-autoload
 
-# Ajustar permisos (puedes ajustar el usuario según sea necesario)
-RUN chown -R www-data:www-data storage bootstrap/cache
+# Ajustar permisos de directorios críticos
+RUN chown -R www-data:www-data /var/www/storage /var/www/bootstrap/cache
+RUN chmod -R 775 /var/www/storage /var/www/bootstrap/cache
+
 
 # Expone el puerto
 EXPOSE 9000

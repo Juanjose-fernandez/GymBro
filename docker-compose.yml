@@ -14,18 +14,25 @@ services:
     volumes:
       - db_data:/var/lib/mysql
     networks:
-      - gymbro-net  # Asegúrate de que esté en la red
+      - gymbro-net
 
   api:
     build:
       context: ./api
       dockerfile: Dockerfile
+      args:
+        UID: ${UID}
+        GID: ${GID}
     depends_on:
       - db
     networks:
       - gymbro-net
     ports:
-      - "9000:9000"  # Asegúrate de exponer el puerto
+      - "9000:9000"
+    volumes:
+      - ./api:/var/www
+      - ./api/storage:/var/www/storage  # Asegúrate de que se monte la carpeta storage
+      - ./api/bootstrap/cache:/var/www/bootstrap/cache  # Monta la caché de bootstrap
 
   frontend:
     build:
@@ -35,7 +42,9 @@ services:
       - "5173:5173"
     networks:
       - gymbro-net
-      
+    volumes:
+      - ./frontend:/app
+
   phpmyadmin:
     image: phpmyadmin/phpmyadmin
     restart: always
@@ -49,7 +58,7 @@ services:
       - gymbro-net
     depends_on:
       - db
-  
+
   nginx:
     image: nginx:alpine
     ports:
@@ -63,7 +72,7 @@ services:
       - gymbro-net
 
 networks:
-  gymbro-net:  # Definición de la red
+  gymbro-net:
 
 volumes:
   db_data:
