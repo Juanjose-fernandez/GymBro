@@ -82,8 +82,8 @@ php artisan migrate
 
 ### 6. Accessing the Application
 Once the containers are up and running, you can access the following endpoints:
-1. API (Laravel): http://localhost:8000
-2. Frontend (Vue.js): http://localhost
+1. API (Laravel): http://localhost
+2. Frontend (Vue.js): http://localhost:5173/
 3. PhpMyAdmin (Mysql): http://localhost:8081/
 
 
@@ -93,5 +93,12 @@ Ensure that ports 8000 and 8080 are free on your machine to avoid conflicts.
 
 You can stop the running containers by pressing CTRL + C in the terminal where you executed docker-compose up.
 
-To remove the containers and free up resources, you can use the following command:
+### 8. Issues and solutions
+
+If you have permissions problems, make sure that your directories belong to your user, as well as having full permissions:
+
+sudo chown -R $(whoami):$(whoami) /path/to/directories/with/bad-permissions/or/bad/user
+chmod -R 775 /path/to/directories/with/bad-permissions/or/bad/user
+
+(if you are using window do the equivalent)
 
