@@ -44,6 +44,7 @@ services:
       - gymbro-net
     volumes:
       - ./frontend:/app
+      - /app/node_modules  # Evitar sobrescribir node_modules dentro del contenedor
 
   phpmyadmin:
     image: phpmyadmin/phpmyadmin

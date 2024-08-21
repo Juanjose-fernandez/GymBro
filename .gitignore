@@ -1,4 +1,6 @@
 .idea
 .env
 
-/api/vendor/*
+/api
+
+/frontend
